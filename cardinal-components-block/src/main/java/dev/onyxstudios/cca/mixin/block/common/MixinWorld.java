@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(value = World.class, priority = 1500)
 public abstract class MixinWorld {
     // ModifyVariable to easily catch the local variable we want
-    @ModifyVariable(method = "tickBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Tickable;tick()V", shift = At.Shift.AFTER))
+    @ModifyVariable(method = "tickBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Tickable;tick()V", shift = At.Shift.AFTER, ordinal = 0))
     protected BlockEntity tick(BlockEntity be) {
         ((InternalComponentProvider) be).getComponentContainer().tickComponents();
         return be;
